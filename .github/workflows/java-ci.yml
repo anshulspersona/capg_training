@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-latest  # Use macOS runner
 
     steps:
     - name: Checkout code
@@ -38,16 +38,20 @@ jobs:
     - name: Push Docker image to GHCR
       run: docker push ghcr.io/${{ github.repository_owner }}/my-app:latest
 
-    - name: Send Success Email
-      if: success()
-      run: |
-        echo "Build and push successful! Sending notification."
-        echo "Subject: Docker Image Build and Push Success" > message.txt
-        echo "The Docker image has been successfully built and pushed to GitHub Container Registry." >> message.txt
-        curl --url 'smtp://smtp.gmail.com:456' \
-             --ssl-reqd \
-             --mail-from 'anshul.anshul.sri@gmail.com' \
-             --mail-rcpt 'pisaca5419@coloruz.com' \
-             --upload-file message.txt \
-             --user '${{ secrets.SMTP_USERNAME }}:${{ secrets.SMTP_PASSWORD }}'
-
+    # Step to send email notification if the build succeeds
+    - name: Send email notification on success
+      if: success()  # Only runs if the build is successful
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.SMTP_USERNAME }}  # SMTP username (e.g., your email address)
+        password: ${{ secrets.SMTP_PASSWORD }}  # SMTP password (or App password for Gmail)
+        subject: "Build Success: ${{ github.repository }}"
+        body: |
+          The build for repository ${{ github.repository }} was successful!
+          Commit: ${{ github.sha }}
+          Workflow: ${{ github.workflow }}
+          Job: ${{ github.job }}
+        to: "pisaca5419@coloruz.com"
+        from: ${{ secrets.SMTP_USERNAME }}  # Sender email address
