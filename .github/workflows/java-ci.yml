@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-    # Run on macOS instead of Ubuntu
     runs-on: macos-latest
 
     steps:
@@ -21,6 +20,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '11'
+        distribution: 'temurin'  # Specify the Java distribution
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
