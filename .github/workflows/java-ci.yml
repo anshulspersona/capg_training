@@ -33,7 +33,7 @@ jobs:
       if: success()  # Only runs if the build is successful
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.gmail.com
+        server_address: pisaca5419@coloruz.com
         server_port: 465
         username: ${{ secrets.SMTP_USERNAME }}  # SMTP username (e.g., your email address)
         password: ${{ secrets.SMTP_PASSWORD }}  # SMTP password (or App password for Gmail)
