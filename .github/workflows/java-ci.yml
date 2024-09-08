@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Use macOS runner
+    runs-on: ubuntu-latest  # Use macOS runner
 
     steps:
     - name: Checkout code
