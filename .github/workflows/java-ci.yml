@@ -33,8 +33,6 @@ jobs:
       run: mvn sonar:sonar \
             -Dsonar.projectKey=anshulspersona_capg_training \
             -Dsonar.organization=anshulspersona \
-            #-Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            #-Dsonar.login=${{ secrets.SONAR_TOKEN}}
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=6a8ec789efbc01ad9bdfbf3270a54444368290bd
 
