@@ -1,5 +1,6 @@
+variables:
+  -  stoken: ${{ secrets.SONAR_TOKEN }}
 name: Build, Test, and SonarQube Analysis
-
 on:
   push:
     branches:
@@ -28,11 +29,12 @@ jobs:
       run: mvn -B package --file pom.xml
 
     # SonarQube analysis step
+
     - name: SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  # This is your SonarQube server URL (e.g., https://sonarcloud.io for SonarCloud)
-      run: mvn clean install sonar:sonar -Dsonar.token= ${{ secrets.SONAR_TOKEN }}
+      run: mvn clean install sonar:sonar -Dsonar.token= ${{ variables.stoken }}
 
 
 
