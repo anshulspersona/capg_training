@@ -30,6 +30,8 @@
 		<java.version>17</java.version>
 			<!--suppress UnresolvedMavenProperty -->
 		<sonar.host.url>${env.SONAR_HOST_URL}</sonar.host.url>
+		<sonar.organization>anshulspersona</sonar.organization>
+		<sonar.projectKey>anshulspersona_capg_training</sonar.projectKey>
 	</properties>
 	<dependencies>
 		<dependency>
