@@ -11,7 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # Use Linux-based runner for better compatibility
-
+    permissions:
+      contents: read
+      packages: write
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -30,7 +32,7 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  # This is your SonarQube server URL (e.g., https://sonarcloud.io for SonarCloud)
-      run: mvn clean install sonar:sonar -Dsonar.token=6a8ec789efbc01ad9bdfbf3270a54444368290bd
+      run: mvn clean install sonar:sonar -Dsonar.token= ${{ secrets.SONAR_TOKEN }}
 
 
 
