@@ -7,9 +7,7 @@ on:
   pull_request:
     branches:
       - main
-env:
-  # Setting an environment variable with the value of a configuration variable
-  env_var: ${{ vars.SONAR_TOKEN }}
+
 
 jobs:
   build:
@@ -36,7 +34,7 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  # This is your SonarQube server URL (e.g., https://sonarcloud.io for SonarCloud)
-      run: mvn clean install sonar:sonar -Dsonar.token= $env_var
+      run: mvn clean install sonar:sonar -Dsonar.token= $SONAR_TOKEN
 
 
 
